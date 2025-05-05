@@ -286,7 +286,7 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                                                 text: "Music • Trending"),
                                           ),
                                           Text(
-                                            "#HOS_TOUR_JAKARTA_D2_TEST",
+                                            "#HOS_TOUR_JAKARTA_D2_TEST_TEST",
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
