@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/layouts/DesktopLayouts.dart';
 import 'package:tugas_1_aplikasi_x/layouts/MobileLayouts.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyBottomNavigatorBar.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyFloatingActionButton.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyPost.dart';
 
 void main() {
   runApp(const MainApp());
