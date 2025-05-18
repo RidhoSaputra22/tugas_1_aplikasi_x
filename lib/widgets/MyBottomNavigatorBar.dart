@@ -6,55 +6,24 @@ class MyBottomNavigatorBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      elevation: 10,
-      type: BottomNavigationBarType.shifting,
-      backgroundColor: MyColors.primaryColor,
-      fixedColor: MyColors.primaryColor,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.home,
-            color: MyColors.primaryTextColor,
+    return Container(
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Icon(Icons.home, color: MyColors.primaryTextColor),
+          Icon(Icons.search, color: MyColors.primaryTextColor),
+          CircleAvatar(
+            radius: 16,
+            backgroundColor: Colors.white,
+            backgroundImage: AssetImage('images/grok.png'),
           ),
-          label: "",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.search,
-            color: MyColors.primaryTextColor,
-          ),
-          label: "",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.golf_course_outlined,
-            color: MyColors.primaryTextColor,
-          ),
-          label: "",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.person,
-            color: MyColors.primaryTextColor,
-          ),
-          label: "",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.notifications_outlined,
-            color: MyColors.primaryTextColor,
-          ),
-          label: "",
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.mail_outline,
-            color: MyColors.primaryTextColor,
-          ),
-          label: "",
-        ),
-      ],
+          Icon(Icons.group_outlined, color: MyColors.primaryTextColor),
+          Icon(Icons.notifications_active_outlined,
+              color: MyColors.primaryTextColor),
+          Icon(Icons.mail_outline, color: MyColors.primaryTextColor),
+        ],
+      ),
     );
   }
 }

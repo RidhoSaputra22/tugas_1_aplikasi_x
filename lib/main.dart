@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/layouts/DesktopLayouts.dart';
 import 'package:tugas_1_aplikasi_x/layouts/MobileLayouts.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
+import 'package:tugas_1_aplikasi_x/widgets/MyLoginPage.dart';
+import 'package:tugas_1_aplikasi_x/widgets/MyLoginPageDesktop.dart';
+import 'package:tugas_1_aplikasi_x/widgets/MyRegistPage.dart';
 
 void main() {
   runApp(const MainApp());
@@ -15,10 +18,17 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+          useMaterial3: false,
           brightness: Brightness.light,
           fontFamily: "Chirp",
           scaffoldBackgroundColor: MyColors.primaryColor,
           primaryColor: MyColors.primaryColor,
+          appBarTheme: AppBarTheme(
+            backgroundColor: MyColors.primaryColor,
+            titleTextStyle: TextStyle(
+              color: MyColors.primaryTextColor,
+            ),
+          ),
           textTheme: TextTheme(
             bodyMedium: TextStyle(
               color: MyColors.primaryTextColor,
@@ -30,7 +40,7 @@ class MainApp extends StatelessWidget {
               color: MyColors.primaryTextColor,
             ),
           )),
-      home: MyHomePage(),
+      home: MyLoginPageDesktop(),
     );
   }
 }
