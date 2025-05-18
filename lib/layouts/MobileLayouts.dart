@@ -116,22 +116,40 @@ class _MobileLayoutsState extends State<MobileLayouts>
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: tabController,
-                children: const [
+                children: [
                   SingleChildScrollView(
                     child: Column(
                       children: [
-                        MyPost(),
-                        MyPost(),
-                        MyPost(),
+                        MyPost(
+                          image: "test/1.png",
+                          profileImage: "ok1.jpg",
+                        ),
+                        MyPost(
+                          image: "test/2.png",
+                          profileImage: "ok2.jpg",
+                        ),
+                        MyPost(
+                          image: "test/3.png",
+                          profileImage: "p1.jpg",
+                        ),
                       ],
                     ),
                   ),
                   SingleChildScrollView(
                     child: Column(
                       children: [
-                        MyPost(),
-                        MyPost(),
-                        MyPost(),
+                        MyPost(
+                          image: "test/1.png",
+                          profileImage: "ok1.jpg",
+                        ),
+                        MyPost(
+                          image: "test/2.png",
+                          profileImage: "ok2.jpg",
+                        ),
+                        MyPost(
+                          image: "test/3.png",
+                          profileImage: "p1.jpg",
+                        ),
                       ],
                     ),
                   ),

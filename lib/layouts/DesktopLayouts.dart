@@ -54,7 +54,7 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                           child: CircleAvatar(
                             radius: 1,
                             backgroundColor: Colors.transparent,
-                            backgroundImage: AssetImage('images/profile.png'),
+                            backgroundImage: AssetImage('ok2.jpg'),
                           ),
                         );
                       }),
@@ -123,22 +123,40 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                     child: TabBarView(
                       physics: const NeverScrollableScrollPhysics(),
                       controller: tabController,
-                      children: const [
+                      children: [
                         SingleChildScrollView(
                           child: Column(
                             children: [
-                              MyPost(),
-                              MyPost(),
-                              MyPost(),
+                              MyPost(
+                                image: "test/1.png",
+                                profileImage: "ok1.jpg",
+                              ),
+                              MyPost(
+                                image: "test/2.png",
+                                profileImage: "ok2.jpg",
+                              ),
+                              MyPost(
+                                image: "test/3.png",
+                                profileImage: "p1.jpg",
+                              ),
                             ],
                           ),
                         ),
                         SingleChildScrollView(
                           child: Column(
                             children: [
-                              MyPost(),
-                              MyPost(),
-                              MyPost(),
+                              MyPost(
+                                image: "test/1.png",
+                                profileImage: "ok1.jpg",
+                              ),
+                              MyPost(
+                                image: "test/2.png",
+                                profileImage: "ok2.jpg",
+                              ),
+                              MyPost(
+                                image: "test/3.png",
+                                profileImage: "p1.jpg",
+                              ),
                             ],
                           ),
                         ),
@@ -464,8 +482,7 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                                       CircleAvatar(
                                         radius: 20,
                                         backgroundColor: Colors.transparent,
-                                        backgroundImage:
-                                            AssetImage('images/profile.png'),
+                                        backgroundImage: AssetImage('p2.jpg'),
                                       ),
                                       SizedBox(width: 5),
                                       Column(
@@ -532,8 +549,7 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                                       CircleAvatar(
                                         radius: 20,
                                         backgroundColor: Colors.transparent,
-                                        backgroundImage:
-                                            AssetImage('images/profile.png'),
+                                        backgroundImage: AssetImage('p1.jpg'),
                                       ),
                                       SizedBox(width: 5),
                                       Column(
@@ -600,8 +616,7 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                                       CircleAvatar(
                                         radius: 20,
                                         backgroundColor: Colors.transparent,
-                                        backgroundImage:
-                                            AssetImage('images/profile.png'),
+                                        backgroundImage: AssetImage('ok2.jpg'),
                                       ),
                                       SizedBox(width: 5),
                                       Column(
@@ -668,8 +683,7 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                                       CircleAvatar(
                                         radius: 20,
                                         backgroundColor: Colors.transparent,
-                                        backgroundImage:
-                                            AssetImage('images/profile.png'),
+                                        backgroundImage: AssetImage('cc.png'),
                                       ),
                                       SizedBox(width: 5),
                                       Column(
