@@ -101,7 +101,7 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                         )),
                     floating: true,
                     backgroundColor: MyColors.primaryColor,
-                    expandedHeight: 150,
+                    expandedHeight: 100,
                     actions: [
                       Text("Upgrade",
                           style: TextStyle(

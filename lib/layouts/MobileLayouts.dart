@@ -94,7 +94,7 @@ class _MobileLayoutsState extends State<MobileLayouts>
                   )),
               floating: true,
               backgroundColor: MyColors.primaryColor,
-              expandedHeight: 150,
+              expandedHeight: 100,
               actions: [
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
