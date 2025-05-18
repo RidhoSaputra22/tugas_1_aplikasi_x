@@ -68,7 +68,7 @@ class _MobileLayoutsState extends State<MobileLayouts>
                 ),
               ),
               bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(50),
+                  preferredSize: const Size.fromHeight(20),
                   child: TabBar(
                     indicatorSize: TabBarIndicatorSize.tab,
                     labelColor: MyColors.primaryTextColor,
@@ -96,20 +96,26 @@ class _MobileLayoutsState extends State<MobileLayouts>
               backgroundColor: MyColors.primaryColor,
               expandedHeight: 150,
               actions: [
-                Text("Upgrade",
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: MyColors.black),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(50),
+                    ),
+                  ),
+                  child: Text(
+                    "Tingkatkan",
                     style: TextStyle(
                       color: MyColors.primaryTextColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w300,
-                    )),
-                IconButton(
-                  icon: const Icon(
-                    Icons.more_vert_sharp,
-                    color: MyColors.primaryTextColor,
-                    size: 30,
+                    ),
                   ),
-                  onPressed: () {},
                 ),
+                SizedBox(
+                  width: 20,
+                )
               ],
             ),
             SliverFillRemaining(
