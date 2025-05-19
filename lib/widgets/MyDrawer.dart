@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyLoginPage.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyLoginPageDesktop.dart';
+import 'package:tugas_1_aplikasi_x/pages/MyLoginPage.dart';
 
 class MyDrawer extends StatelessWidget {
   final double drawerWidth;
@@ -372,15 +371,8 @@ class MyDrawer extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    MediaQuery.of(context).size.width > 600
-                        ? Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyLoginPageDesktop()))
-                        : Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyLoginPage()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => MyLoginPage()));
                   },
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 20),
