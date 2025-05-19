@@ -40,7 +40,7 @@ class MainApp extends StatelessWidget {
               color: MyColors.primaryTextColor,
             ),
           )),
-      home: MyLoginPageDesktop(),
+      home: MyHomePage(),
     );
   }
 }
