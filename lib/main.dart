@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/layouts/DesktopLayouts.dart';
 import 'package:tugas_1_aplikasi_x/layouts/MobileLayouts.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyLoginPage.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyLoginPageDesktop.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyRegistPage.dart';
+import 'package:tugas_1_aplikasi_x/pages/MyLoginPage.dart';
 
 void main() {
   runApp(const MainApp());
@@ -40,7 +38,7 @@ class MainApp extends StatelessWidget {
               color: MyColors.primaryTextColor,
             ),
           )),
-      home: MyHomePage(),
+      home: MyLoginPage(),
     );
   }
 }

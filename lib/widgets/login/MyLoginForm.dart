@@ -1,9 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/main.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
+import 'package:tugas_1_aplikasi_x/models/User.dart';
 
-class MyLoginPage extends StatelessWidget {
-  const MyLoginPage({super.key});
+class MyLoginForm extends StatefulWidget {
+  final Function(User user) onNext;
+  final User user;
+
+  const MyLoginForm({
+    super.key,
+    required this.onNext,
+    required this.user,
+  });
+
+  @override
+  State<MyLoginForm> createState() => _MyLoginFormState();
+}
+
+class _MyLoginFormState extends State<MyLoginForm> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController namaController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    emailController.text = widget.user.email ?? '';
+    namaController.text = widget.user.nama ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +69,7 @@ class MyLoginPage extends StatelessWidget {
               SizedBox(height: 20),
               Container(
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     label: Text("Phone, email, or username"),
@@ -114,11 +139,12 @@ class MyLoginPage extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MyLoginPagePassword()),
-                );
+                widget.onNext(User(
+                  email: emailController.text,
+                  nama: namaController.text,
+                  password: widget.user.password,
+                  tanggal_lahir: widget.user.tanggal_lahir,
+                ));
               },
             ),
           ],
@@ -128,8 +154,30 @@ class MyLoginPage extends StatelessWidget {
   }
 }
 
-class MyLoginPagePassword extends StatelessWidget {
-  const MyLoginPagePassword({super.key});
+class MyLoginPagePassword extends StatefulWidget {
+  final User user;
+  final Function(User user) onLogin;
+  const MyLoginPagePassword({
+    super.key,
+    required this.user,
+    required this.onLogin,
+  });
+
+  @override
+  State<MyLoginPagePassword> createState() => _MyLoginPagePasswordState();
+}
+
+class _MyLoginPagePasswordState extends State<MyLoginPagePassword> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    emailController.text = widget.user.email ?? '';
+    passwordController.text = widget.user.password ?? '';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,6 +221,7 @@ class MyLoginPagePassword extends StatelessWidget {
               SizedBox(height: 20),
               Container(
                 child: TextField(
+                  controller: emailController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     label: Text("Email"),
@@ -182,6 +231,7 @@ class MyLoginPagePassword extends StatelessWidget {
               SizedBox(height: 20),
               Container(
                 child: TextField(
+                  controller: passwordController,
                   autofocus: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -252,144 +302,12 @@ class MyLoginPagePassword extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MyHomePage()),
-                );
+                widget.user.password = passwordController.text;
+                widget.user.email = emailController.text;
+                widget.onLogin(widget.user);
               },
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class SignInPage extends StatelessWidget {
-  final void Function() onTap;
-  const SignInPage({super.key, required this.onTap});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Logo X
-              const Icon(Icons.clear,
-                  size: 50), // Ganti dengan logo asli jika ada
-              const SizedBox(height: 24),
-
-              // Title
-              const Text(
-                'Sign in to X',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 24),
-
-              // Google Account (mock)
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade300),
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: ListTile(
-                  leading: const CircleAvatar(
-                    backgroundImage: AssetImage('images/profile.png'),
-                  ),
-                  title: const Text(
-                    'Sign in as ThisUser',
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
-                  ),
-                  subtitle: const Text('thisuser22022@gmail.com'),
-                  trailing: const Icon(Icons.account_circle),
-                  onTap: () {},
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Apple Sign-in Button
-              OutlinedButton.icon(
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                ),
-                onPressed: () {},
-                icon: const Icon(Icons.apple),
-                label: const Text('Sign in with Apple'),
-              ),
-              const SizedBox(height: 16),
-
-              // OR Divider
-              Row(
-                children: const [
-                  Expanded(child: Divider()),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Text("or"),
-                  ),
-                  Expanded(child: Divider()),
-                ],
-              ),
-              const SizedBox(height: 16),
-
-              // Input Field
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'Phone, email, or username',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Next Button
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  backgroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                ),
-                onPressed: onTap as void Function()?,
-                child:
-                    const Text('Next', style: TextStyle(color: Colors.white)),
-              ),
-              const SizedBox(height: 12),
-
-              // Forgot password
-              OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  minimumSize: const Size.fromHeight(50),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                ),
-                onPressed: () {},
-                child: const Text('Forgot password?'),
-              ),
-              const SizedBox(height: 24),
-
-              // Sign up prompt
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("Don't have an account? "),
-                  Text(
-                    "Sign up",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ],
-              ),
-            ],
-          ),
         ),
       ),
     );
