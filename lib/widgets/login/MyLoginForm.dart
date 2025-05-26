@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/main.dart';
+import 'package:tugas_1_aplikasi_x/models/AuthServices.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
 import 'package:tugas_1_aplikasi_x/models/User.dart';
+import 'package:tugas_1_aplikasi_x/pages/MyLoginPage.dart';
 
 class MyLoginForm extends StatefulWidget {
   final Function(User user) onNext;
@@ -156,11 +158,11 @@ class _MyLoginFormState extends State<MyLoginForm> {
 
 class MyLoginPagePassword extends StatefulWidget {
   final User user;
-  final Function(User user) onLogin;
+  // final Function(User user) onLogin;
   const MyLoginPagePassword({
     super.key,
     required this.user,
-    required this.onLogin,
+    // required this.onLogin,
   });
 
   @override
@@ -171,12 +173,25 @@ class _MyLoginPagePasswordState extends State<MyLoginPagePassword> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  _login(user) async {
+    final data = await AuthService.login(user.email, user.password);
+    if (data != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyHomePage(),
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    emailController.text = widget.user.email ?? '';
-    passwordController.text = widget.user.password ?? '';
+    emailController.text = widget.user.email;
+    passwordController.text = widget.user.password;
+    _login(widget.user);
   }
 
   @override
@@ -304,7 +319,7 @@ class _MyLoginPagePasswordState extends State<MyLoginPagePassword> {
               onTap: () {
                 widget.user.password = passwordController.text;
                 widget.user.email = emailController.text;
-                widget.onLogin(widget.user);
+                _login(widget.user);
               },
             ),
           ],

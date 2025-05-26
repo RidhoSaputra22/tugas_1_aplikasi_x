@@ -61,8 +61,8 @@ class _MobileLayoutsState extends State<MobileLayouts>
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: Theme.of(context).brightness == Brightness.light
-                          ? AssetImage('images/logo-black.png')
-                          : AssetImage('images/logo-white.png'),
+                          ? NetworkImage('images/logo-black.png')
+                          : NetworkImage('images/logo-white.png'),
                     ),
                   ),
                 ),

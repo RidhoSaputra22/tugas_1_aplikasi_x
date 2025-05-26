@@ -4,17 +4,20 @@ const bcrypt = require('bcryptjs');
 // Register
 exports.register = async (req, res) => {
   const { nama, email, password, tanggal_lahir } = req.body;
+  if(nama || email || password || tanggal_lahir){
 
-  const hashedPassword = await bcrypt.hash(password, 10);
-
-  db.query(
-    'INSERT INTO users (nama, email, password, tanggal_lahir) VALUES (?, ?, ?, ?)',
-    [nama, email, hashedPassword, tanggal_lahir],
-    (err, result) => {
-      if (err) return res.status(500).json({ error: err });
-      res.json({ message: 'Registration successful', userId: result.insertId });
-    }
-  );
+    
+    const hashedPassword = await bcrypt.hash(password, 10);
+    
+    db.query(
+      'INSERT INTO users (nama, email, password, tanggal_lahir) VALUES (?, ?, ?, ?)',
+      [nama, email, hashedPassword, tanggal_lahir],
+      (err, result) => {
+        if (err) return res.status(500).json({ error: err });
+        res.json({ message: 'Registration successful', userId: result.insertId });
+      }
+    );
+  }
 };
 
 // Login
