@@ -17,42 +17,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
   // final Future<List<User>> users = User.fetchUsers();
   User user = User(email: "", password: "", nama: "", tanggal_lahir: "");
 
-  _login(user) async {
-    final data = await AuthService.login(user.email, user.password);
-    if (data != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyHomePage(),
-        ),
-      );
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyLoginPage(),
-        ),
-      );
-    }
-  }
-
-  _regist(user) async {
-    final data = await AuthService.register(
-      nama: user.nama,
-      email: user.email,
-      password: user.password,
-      tanggalLahir: user.tanggal_lahir,
-    );
-    if (data) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MyLoginPage(),
-        ),
-      );
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -71,9 +35,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
               MaterialPageRoute(
                 builder: (context) => MyRegistPage(
                   user: user,
-                  onRegister: (user) {
-                    _regist(user);
-                  },
                 ),
               ),
             );
@@ -90,9 +51,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
                       MaterialPageRoute(
                         builder: (context) => MyLoginPagePassword(
                           user: user,
-                          onLogin: (user) {
-                            _login(user);
-                          },
                         ),
                       ),
                     );
@@ -117,9 +75,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
                     width: MediaQuery.of(context).size.width / 3,
                     child: MyRegistPage(
                       user: user,
-                      onRegister: (user) {
-                        _regist(user);
-                      },
                     ),
                   ),
                 ),
@@ -142,9 +97,6 @@ class _MyLoginPageState extends State<MyLoginPage> {
                               width: MediaQuery.of(context).size.width / 3,
                               child: MyLoginPagePassword(
                                 user: user,
-                                onLogin: (user) {
-                                  _login(user);
-                                },
                               ),
                             ),
                           ),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
 
 class MyPost extends StatelessWidget {
-  const MyPost({super.key});
+  final String image;
+  final String profileImage;
+  MyPost({super.key, required this.image, required this.profileImage});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class MyPost extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.transparent,
-                  backgroundImage: AssetImage('images/profile.png'),
+                  backgroundImage: AssetImage(profileImage),
                 ),
               ),
               SizedBox(
@@ -139,7 +141,7 @@ class MyPost extends StatelessWidget {
                           Radius.circular(12),
                         ),
                         image: DecorationImage(
-                          image: AssetImage('images/profile.png'),
+                          image: AssetImage(image),
                           fit: BoxFit.cover,
                         ),
                       ),

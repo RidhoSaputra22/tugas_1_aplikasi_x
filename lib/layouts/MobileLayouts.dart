@@ -61,14 +61,14 @@ class _MobileLayoutsState extends State<MobileLayouts>
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: Theme.of(context).brightness == Brightness.light
-                          ? AssetImage('images/logo-black.png')
-                          : AssetImage('images/logo-white.png'),
+                          ? NetworkImage('images/logo-black.png')
+                          : NetworkImage('images/logo-white.png'),
                     ),
                   ),
                 ),
               ),
               bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(50),
+                  preferredSize: const Size.fromHeight(20),
                   child: TabBar(
                     indicatorSize: TabBarIndicatorSize.tab,
                     labelColor: MyColors.primaryTextColor,
@@ -96,42 +96,66 @@ class _MobileLayoutsState extends State<MobileLayouts>
               backgroundColor: MyColors.primaryColor,
               expandedHeight: 100,
               actions: [
-                Text("Upgrade",
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: MyColors.black),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(50),
+                    ),
+                  ),
+                  child: Text(
+                    "Tingkatkan",
                     style: TextStyle(
                       color: MyColors.primaryTextColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w300,
-                    )),
-                IconButton(
-                  icon: const Icon(
-                    Icons.more_vert_sharp,
-                    color: MyColors.primaryTextColor,
-                    size: 30,
+                    ),
                   ),
-                  onPressed: () {},
                 ),
+                SizedBox(
+                  width: 20,
+                )
               ],
             ),
             SliverFillRemaining(
               child: TabBarView(
                 physics: const NeverScrollableScrollPhysics(),
                 controller: tabController,
-                children: const [
+                children: [
                   SingleChildScrollView(
                     child: Column(
                       children: [
-                        MyPost(),
-                        MyPost(),
-                        MyPost(),
+                        MyPost(
+                          image: "test/1.png",
+                          profileImage: "ok1.jpg",
+                        ),
+                        MyPost(
+                          image: "test/2.png",
+                          profileImage: "ok2.jpg",
+                        ),
+                        MyPost(
+                          image: "test/3.png",
+                          profileImage: "p1.jpg",
+                        ),
                       ],
                     ),
                   ),
                   SingleChildScrollView(
                     child: Column(
                       children: [
-                        MyPost(),
-                        MyPost(),
-                        MyPost(),
+                        MyPost(
+                          image: "test/1.png",
+                          profileImage: "ok1.jpg",
+                        ),
+                        MyPost(
+                          image: "test/2.png",
+                          profileImage: "ok2.jpg",
+                        ),
+                        MyPost(
+                          image: "test/3.png",
+                          profileImage: "p1.jpg",
+                        ),
                       ],
                     ),
                   ),

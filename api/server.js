@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const path = require('path');
 const userController = require('./userController');
 const authController = require('./authController');
 
@@ -17,6 +18,26 @@ app.get('/users/search', userController.searchUsers);
 
 app.post('/auth/register', authController.register);
 app.post('/auth/login', authController.login);
+
+// Serve video thumbnail
+app.get('/feed/:filename', (req, res) => {
+  const file = req.params.filename;
+  const filePath = path.join(__dirname, 'feed', file);
+  console.log(filePath);
+  
+  res.sendFile(filePath, err => {
+    if (err) res.status(404).send('Thumbnail not found');
+  });
+});
+
+// Serve user photo
+app.get('/user/:filename', (req, res) => {
+  const file = req.params.filename;
+  const filePath = path.join(__dirname, 'user', file);
+  res.sendFile(filePath, err => {
+    if (err) res.status(404).send('User photo not found');
+  });
+});
 
 
 

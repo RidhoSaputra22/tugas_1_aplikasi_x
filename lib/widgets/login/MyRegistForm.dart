@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+
+import 'package:tugas_1_aplikasi_x/models/AuthServices.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
 import 'package:tugas_1_aplikasi_x/models/User.dart';
 import 'package:tugas_1_aplikasi_x/pages/MyLoginPage.dart';
 
 class MyRegistPage extends StatefulWidget {
-  final Function(User user) onRegister;
+  // final Function(User user) onRegister;
   final User user;
-  const MyRegistPage({super.key, required this.onRegister, required this.user});
+  const MyRegistPage({
+    super.key,
+    // required this.onRegister,
+    required this.user,
+  });
+
 
   @override
   State<MyRegistPage> createState() => _MyRegistPageState();
@@ -46,6 +53,31 @@ class _MyRegistPageState extends State<MyRegistPage> {
       selectedDay != null &&
       selectedYear != null;
 
+  _regist(user) async {
+    final data = await AuthService.register(
+      nama: user.nama,
+      email: user.email,
+      password: user.password,
+      tanggalLahir: user.tanggal_lahir,
+    );
+    if (data) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyLoginPage(),
+        ),
+      );
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _regist(widget.user);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,8 +92,8 @@ class _MyRegistPageState extends State<MyRegistPage> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: Theme.of(context).brightness == Brightness.light
-                    ? AssetImage('images/logo-black.png')
-                    : AssetImage('images/logo-white.png'),
+                    ? NetworkImage('images/logo-black.png')
+                    : NetworkImage('images/logo-white.png'),
               ),
             ),
           ),
@@ -246,7 +278,7 @@ class _MyRegistPageState extends State<MyRegistPage> {
                       widget.user.tanggal_lahir =
                           '$selectedMonth $selectedDay, $selectedYear';
 
-                      widget.onRegister(widget.user);
+                      _regist(widget.user);
                     }
                   : null,
             ),
