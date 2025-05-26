@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:tugas_1_aplikasi_x/models/AuthServices.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
 import 'package:tugas_1_aplikasi_x/models/User.dart';
@@ -12,6 +13,7 @@ class MyRegistPage extends StatefulWidget {
     // required this.onRegister,
     required this.user,
   });
+
 
   @override
   State<MyRegistPage> createState() => _MyRegistPageState();
@@ -74,6 +76,7 @@ class _MyRegistPageState extends State<MyRegistPage> {
     super.initState();
     _regist(widget.user);
   }
+
 
   @override
   Widget build(BuildContext context) {

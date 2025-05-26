@@ -17,7 +17,11 @@ class MyDrawer extends StatelessWidget {
         shape: BeveledRectangleBorder(),
         backgroundColor: MyColors.primaryColor,
         child: Container(
-          padding: EdgeInsets.only(top: 20, left: 20, right: 20),
+          padding: EdgeInsets.only(
+            top: 20,
+            left: 20,
+            right: 20,
+          ),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,

@@ -18,7 +18,7 @@ exports.register = async (req, res) => {
       }
     );
   }
-};
+
 
 // Login
 exports.login = (req, res) => {
