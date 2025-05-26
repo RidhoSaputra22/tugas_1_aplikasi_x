@@ -48,7 +48,8 @@ class _MobileLayoutsState extends State<MobileLayouts>
                     child: CircleAvatar(
                       radius: 1,
                       backgroundColor: Colors.transparent,
-                      backgroundImage: AssetImage('images/profile.png'),
+                      backgroundImage: NetworkImage(
+                          'http://localhost:3000/user/profile.png'),
                     ),
                   );
                 }),
@@ -97,13 +98,8 @@ class _MobileLayoutsState extends State<MobileLayouts>
               expandedHeight: 100,
               actions: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: MyColors.black),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(50),
-                    ),
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+                  decoration: BoxDecoration(),
                   child: Text(
                     "Tingkatkan",
                     style: TextStyle(
@@ -127,16 +123,16 @@ class _MobileLayoutsState extends State<MobileLayouts>
                     child: Column(
                       children: [
                         MyPost(
-                          image: "test/1.png",
-                          profileImage: "ok1.jpg",
+                          image: "http://localhost:3000/feed/1.png",
+                          profileImage: "http://localhost:3000/user/ok1.jpg",
                         ),
                         MyPost(
-                          image: "test/2.png",
-                          profileImage: "ok2.jpg",
+                          image: "http://localhost:3000/feed/2.png",
+                          profileImage: "http://localhost:3000/user/ok2.jpg",
                         ),
                         MyPost(
-                          image: "test/3.png",
-                          profileImage: "p1.jpg",
+                          image: "http://localhost:3000/feed/3.png",
+                          profileImage: "http://localhost:3000/user/p1.jpg",
                         ),
                       ],
                     ),
@@ -145,16 +141,16 @@ class _MobileLayoutsState extends State<MobileLayouts>
                     child: Column(
                       children: [
                         MyPost(
-                          image: "test/1.png",
-                          profileImage: "ok1.jpg",
+                          image: "http://localhost:3000/feed/1.png",
+                          profileImage: "http://localhost:3000/user/ok1.jpg",
                         ),
                         MyPost(
-                          image: "test/2.png",
-                          profileImage: "ok2.jpg",
+                          image: "http://localhost:3000/feed/2.png",
+                          profileImage: "http://localhost:3000/user/ok2.jpg",
                         ),
                         MyPost(
-                          image: "test/3.png",
-                          profileImage: "p1.jpg",
+                          image: "http://localhost:3000/feed/3.png",
+                          profileImage: "http://localhost:3000/user/p1.jpg",
                         ),
                       ],
                     ),

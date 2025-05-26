@@ -48,7 +48,7 @@ class MyPost extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.transparent,
-                  backgroundImage: AssetImage(profileImage),
+                  backgroundImage: NetworkImage(profileImage),
                 ),
               ),
               SizedBox(
@@ -141,7 +141,7 @@ class MyPost extends StatelessWidget {
                           Radius.circular(12),
                         ),
                         image: DecorationImage(
-                          image: AssetImage(image),
+                          image: NetworkImage(image),
                           fit: BoxFit.cover,
                         ),
                       ),

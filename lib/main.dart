@@ -38,24 +38,27 @@ class MainApp extends StatelessWidget {
               color: MyColors.primaryTextColor,
             ),
           )),
-      home: MyLoginPage(),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  final bool isLogin;
+  const MyHomePage({super.key, this.isLogin = true});
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth < 600) {
-          return MobileLayouts();
-        } else {
-          return DesktopLayouts();
-        }
-      },
-    );
+    return isLogin
+        ? LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+              if (constraints.maxWidth < 600) {
+                return MobileLayouts();
+              } else {
+                return DesktopLayouts();
+              }
+            },
+          )
+        : MyLoginPage();
   }
 }
