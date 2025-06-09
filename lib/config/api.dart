@@ -1,3 +1,3 @@
 class ApiService {
-  static const String baseUrl = 'http://localhost:8000';
+  static const String baseUrl = 'https://feby.twitter.api.thaumazein.my.id';
 }

@@ -76,7 +76,7 @@ class Post {
       });
 
       var res = await Dio().post(
-        '${baseUrl}/file/posts/',
+        '${baseUrl}/file/posts',
         data: formData,
       );
 
