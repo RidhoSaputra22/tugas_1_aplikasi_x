@@ -1,38 +1,48 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:tugas_1_aplikasi_x/config/api.dart';
 
 class User {
-  String nama;
-  String email;
-  String password;
-  String tanggal_lahir;
+  int? id;
+  String? nama;
+  String? email;
+  String? password;
+  DateTime? tanggal_lahir;
+  String? avatar;
 
   User({
+    required this.id,
     required this.nama,
     required this.email,
     required this.password,
     required this.tanggal_lahir,
+    required this.avatar,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-      nama: json['nama'],
-      email: json['email'],
-      password: json['password'],
-      tanggal_lahir: json['tanggal_lahir'],
+      id: json['id'] as int? ?? null,
+      nama: json['nama'] ?? null,
+      email: json['email'] ?? null,
+      password: json['password'] ?? null,
+      tanggal_lahir: json['tanggal_lahir'] != null
+          ? DateTime.parse(json['tanggal_lahir'])
+          : null,
+      avatar: json['avatar'] ?? null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'nama': nama,
-      'email': email,
-      'password': password,
-      'tanggal_lahir': tanggal_lahir,
+      'id': this.id ?? null,
+      'nama': this.nama ?? null,
+      'email': this.email ?? null,
+      'password': this.password ?? null,
+      'tanggal_lahir': this.tanggal_lahir?.toIso8601String() ?? null,
     };
   }
 
-  static const String baseUrl = 'http://localhost:3000'; // or your IP
+  static const String baseUrl = ApiService.baseUrl; // or your IP
 
   static Future<List<User>> fetchUsers() async {
     final response = await http.get(Uri.parse('$baseUrl/users'));

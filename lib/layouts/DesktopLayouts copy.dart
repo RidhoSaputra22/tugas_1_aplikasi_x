@@ -3,15 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
 import 'package:tugas_1_aplikasi_x/models/Post.dart';
-import 'package:tugas_1_aplikasi_x/models/User.dart';
-import 'package:tugas_1_aplikasi_x/widgets/MyAddPost.dart';
 import 'package:tugas_1_aplikasi_x/widgets/MyDrawer.dart';
 import 'package:tugas_1_aplikasi_x/widgets/MyFloatingActionButton.dart';
 import 'package:tugas_1_aplikasi_x/widgets/MyPost.dart';
 
 class DesktopLayouts extends StatefulWidget {
-  final User user;
-  const DesktopLayouts({super.key, required this.user});
+  const DesktopLayouts({super.key});
 
   @override
   State<DesktopLayouts> createState() => _DesktopLayoutsState();
@@ -46,95 +43,171 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
               drawerWidth: 0.25,
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          // padding: EdgeInsets.all(10),
-                          child: InkWell(
-                            onTap: () {
-                              Scaffold.of(context).openDrawer();
-                            },
-                            child: CircleAvatar(
-                              radius: 20,
-                              backgroundColor: Colors.transparent,
-                              backgroundImage: NetworkImage(''),
-                            ),
+              child: CustomScrollView(
+                slivers: [
+                  SliverAppBar(
+                    iconTheme:
+                        const IconThemeData(color: MyColors.primaryTextColor),
+                    leading: Container(
+                      padding: EdgeInsets.all(10),
+                      child: Builder(builder: (context) {
+                        return InkWell(
+                          onTap: () {
+                            Scaffold.of(context).openDrawer();
+                          },
+                          child: CircleAvatar(
+                            radius: 1,
+                            backgroundColor: Colors.transparent,
+                            backgroundImage: NetworkImage(
+                                'http://localhost:3000/user/profile.png'),
                           ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.all(10),
-                          height: 25,
-                          width: 25,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: Theme.of(context).brightness ==
-                                      Brightness.light
-                                  ? AssetImage('images/logo-black.png')
-                                  : AssetImage('images/logo-white.png'),
-                            ),
-                          ),
-                        ),
-                        Row(children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 16),
-                            decoration: BoxDecoration(),
-                            child: Text(
-                              "Tingkatkan",
-                              style: TextStyle(
-                                color: MyColors.primaryTextColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w300,
-                              ),
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(
-                              Icons.more_vert_sharp,
-                              color: MyColors.primaryTextColor,
-                              size: 30,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ]),
-                      ],
+                        );
+                      }),
                     ),
-                  ),
-                  MyAddPost(
-                    user: widget.user,
-                  ),
-                  TabBar(
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    labelColor: MyColors.primaryTextColor,
-                    controller: tabController,
-                    indicatorColor: MyColors.primaryTextColor,
-                    unselectedLabelColor: MyColors.gray,
-                    tabs: [
-                      Tab(
-                        child: Text(
-                          "For You",
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w100),
+                    title: Center(
+                      child: Container(
+                        padding: EdgeInsets.all(10),
+                        height: 25,
+                        width: 25,
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                            image:
+                                Theme.of(context).brightness == Brightness.light
+                                    ? NetworkImage('images/logo-black.png')
+                                    : NetworkImage('images/logo-white.png'),
+                          ),
                         ),
                       ),
-                      Tab(
+                    ),
+                    bottom: PreferredSize(
+                      preferredSize: const Size.fromHeight(150),
+                      child: Column(
+                        children: [
+                          Container(
+                            height: postFormHeight,
+                            child: Column(
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    // Profile Image
+                                    const CircleAvatar(
+                                      radius: 20,
+                                      backgroundImage: NetworkImage(
+                                          'https://i.pravatar.cc/150?img=3'), // Use user's photo
+                                    ),
+                                    const SizedBox(width: 12),
+                                    // Text Field
+                                    Expanded(
+                                      child: TextField(
+                                        maxLines: null,
+                                        decoration: InputDecoration(
+                                          hintText: "What's happening?",
+                                          border: InputBorder.none,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const Spacer(),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                        icon: const Icon(Icons.image_outlined),
+                                        onPressed: () {}),
+                                    IconButton(
+                                        icon:
+                                            const Icon(Icons.gif_box_outlined),
+                                        onPressed: () {}),
+                                    IconButton(
+                                        icon: const Icon(Icons.poll_outlined),
+                                        onPressed: () {}),
+                                    IconButton(
+                                        icon: const Icon(
+                                            Icons.emoji_emotions_outlined),
+                                        onPressed: () {}),
+                                    IconButton(
+                                        icon:
+                                            const Icon(Icons.schedule_outlined),
+                                        onPressed: () {}),
+                                    IconButton(
+                                        icon: const Icon(
+                                            Icons.location_on_outlined),
+                                        onPressed: () {}),
+                                    const Spacer(),
+                                    ElevatedButton(
+                                      onPressed:
+                                          () {}, // Enable when user types something
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.grey[700],
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                      ),
+                                      child: const Text("Post"),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                          // Spacer(),
+                          TabBar(
+                            indicatorSize: TabBarIndicatorSize.tab,
+                            labelColor: MyColors.primaryTextColor,
+                            controller: tabController,
+                            indicatorColor: MyColors.primaryTextColor,
+                            unselectedLabelColor: MyColors.gray,
+                            tabs: [
+                              Tab(
+                                child: Text(
+                                  "For You",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w100),
+                                ),
+                              ),
+                              Tab(
+                                child: Text(
+                                  "Following",
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w100),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    floating: true,
+                    backgroundColor: MyColors.primaryColor,
+                    expandedHeight: 100,
+                    actions: [
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 0, vertical: 16),
+                        decoration: BoxDecoration(),
                         child: Text(
-                          "Following",
+                          "Tingkatkan",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w100),
+                            color: MyColors.primaryTextColor,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.more_vert_sharp,
+                          color: MyColors.primaryTextColor,
+                          size: 30,
+                        ),
+                        onPressed: () {},
                       ),
                     ],
                   ),
-                  Expanded(
+                  SliverFillRemaining(
                     child: TabBarView(
                       physics: const NeverScrollableScrollPhysics(),
                       controller: tabController,
@@ -187,7 +260,7 @@ class _DesktopLayoutsState extends State<DesktopLayouts>
                         ),
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),

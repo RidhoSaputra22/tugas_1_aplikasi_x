@@ -1,24 +1,16 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:tugas_1_aplikasi_x/config/api.dart';
+import 'package:tugas_1_aplikasi_x/models/User.dart';
 
 class AuthService {
-  static const String baseUrl = 'http://localhost:3000';
+  static const String baseUrl = ApiService.baseUrl;
 
-  static Future<bool> register({
-    required String nama,
-    required String email,
-    required String password,
-    required String tanggalLahir,
-  }) async {
+  static Future<bool> register(User user) async {
     final response = await http.post(
       Uri.parse('$baseUrl/auth/register'),
       headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        "nama": nama,
-        "email": email,
-        "password": password,
-        "tanggal_lahir": tanggalLahir,
-      }),
+      body: json.encode(user.toJson()),
     );
 
     if (response.statusCode == 200) {
@@ -30,13 +22,13 @@ class AuthService {
   }
 
   static Future<Map<String, dynamic>?> login(
-      String email, String password) async {
+      String? email, String? password) async {
     final response = await http.post(
       Uri.parse('$baseUrl/auth/login'),
       headers: {'Content-Type': 'application/json'},
       body: json.encode({
-        "email": email,
-        "password": password,
+        "email": email ?? "",
+        "password": password ?? "",
       }),
     );
 

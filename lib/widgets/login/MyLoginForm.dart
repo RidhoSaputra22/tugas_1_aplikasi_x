@@ -142,6 +142,8 @@ class _MyLoginFormState extends State<MyLoginForm> {
               ),
               onTap: () {
                 widget.onNext(User(
+                  avatar: widget.user.avatar,
+                  id: widget.user.id,
                   email: emailController.text,
                   nama: namaController.text,
                   password: widget.user.password,
@@ -175,11 +177,14 @@ class _MyLoginPagePasswordState extends State<MyLoginPagePassword> {
 
   _login(user) async {
     final data = await AuthService.login(user.email, user.password);
-    if (data != null) {
+    if (data != null && data['user'] != null) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => MyHomePage(),
+          builder: (context) => MyHomePage(
+            isLogin: true,
+            user: User.fromJson(data['user']),
+          ),
         ),
       );
     }
@@ -189,8 +194,8 @@ class _MyLoginPagePasswordState extends State<MyLoginPagePassword> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    emailController.text = widget.user.email;
-    passwordController.text = widget.user.password;
+    emailController.text = widget.user.email ?? '';
+    passwordController.text = widget.user.password ?? '';
     _login(widget.user);
   }
 

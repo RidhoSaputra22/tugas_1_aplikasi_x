@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/layouts/DesktopLayouts.dart';
 import 'package:tugas_1_aplikasi_x/layouts/MobileLayouts.dart';
+import 'package:tugas_1_aplikasi_x/models/AuthServices.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
+import 'package:tugas_1_aplikasi_x/models/User.dart';
 import 'package:tugas_1_aplikasi_x/pages/MyLoginPage.dart';
 
 void main() {
@@ -38,24 +40,34 @@ class MainApp extends StatelessWidget {
               color: MyColors.primaryTextColor,
             ),
           )),
-      home: MyHomePage(),
+      home: MyHomePage(isLogin: false, user: null),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   final bool isLogin;
-  const MyHomePage({super.key, this.isLogin = true});
+  final User? user;
+  const MyHomePage({super.key, this.isLogin = false, required this.user});
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
   Widget build(BuildContext context) {
-    return isLogin
+    return widget.isLogin
         ? LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               if (constraints.maxWidth < 600) {
-                return MobileLayouts();
+                return MobileLayouts(
+                  user: widget.user!,
+                );
               } else {
-                return DesktopLayouts();
+                return DesktopLayouts(
+                  user: widget.user!,
+                );
               }
             },
           )

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
+import 'package:tugas_1_aplikasi_x/models/Post.dart';
 
 class MyPost extends StatelessWidget {
-  final String image;
-  final String profileImage;
-  MyPost({super.key, required this.image, required this.profileImage});
+  final Post post;
+
+  MyPost({
+    super.key,
+    required this.post,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +21,7 @@ class MyPost extends StatelessWidget {
           ),
         ),
       ),
-      padding: EdgeInsets.all(20),
+      padding: EdgeInsets.all(17),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +52,7 @@ class MyPost extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.transparent,
-                  backgroundImage: NetworkImage(profileImage),
+                  backgroundImage: NetworkImage(post.user.avatar!),
                 ),
               ),
               SizedBox(
@@ -68,24 +72,25 @@ class MyPost extends StatelessWidget {
                             style: DefaultTextStyle.of(context).style,
                             children: [
                               TextSpan(
-                                text: "This User ",
+                                text: post.user.nama,
                                 style: TextStyle(
                                   color: MyColors.primaryTextColor,
-                                  fontSize: 20,
+                                  fontSize: 17,
                                 ),
                               ),
                               TextSpan(
-                                text: "@thisuser_ ",
+                                text: "@${post.user.nama}",
                                 style: TextStyle(
                                   color: MyColors.gray,
-                                  fontSize: 20,
+                                  fontSize: 17,
                                 ),
                               ),
                               TextSpan(
-                                text: "• 1d ",
+                                text:
+                                    " • ${post.created_at!.day}/${post.created_at!.month}/${post.created_at!.year}",
                                 style: TextStyle(
                                   color: MyColors.gray,
-                                  fontSize: 16,
+                                  fontSize: 17,
                                 ),
                               ),
                             ],
@@ -95,7 +100,7 @@ class MyPost extends StatelessWidget {
                         Icon(
                           Icons.golf_course,
                           color: MyColors.gray,
-                          size: 20,
+                          size: 17,
                         ),
                         // Spacer(),
                         SizedBox(
@@ -104,48 +109,34 @@ class MyPost extends StatelessWidget {
                         Icon(
                           Icons.more_vert,
                           color: MyColors.gray,
-                          size: 20,
+                          size: 17,
                         ),
                       ],
                     ),
-                    RichText(
-                      text: TextSpan(children: [
-                        TextSpan(
-                          text: "Replying to ",
-                          style: TextStyle(
-                            color: MyColors.gray,
-                            fontSize: 16,
-                          ),
-                        ),
-                        TextSpan(
-                          text: "@someuser_ ",
-                          style: TextStyle(
-                            color: MyColors.secondaryColor,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ]),
-                    ),
                     Text(
-                      "This User Message",
+                      post.body,
                       style: TextStyle(
                           color: MyColors.primaryTextColor,
-                          fontSize: 18,
+                          fontSize: 15,
                           fontWeight: FontWeight.w100),
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      height: 300,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(12),
-                        ),
-                        image: DecorationImage(
-                          image: NetworkImage(image),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+                    post.photo != null && post.photo != ""
+                        ? Container(
+                            margin: EdgeInsets.symmetric(vertical: 10),
+                            height: 300,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(12),
+                              ),
+                              image: DecorationImage(
+                                image: NetworkImage(post.photo ?? ""),
+                                fit: BoxFit.contain,
+                              ),
+                            ),
+                          )
+                        : Container(
+                            height: 60,
+                          ),
                     Container(
                         child: Row(
                       children: [

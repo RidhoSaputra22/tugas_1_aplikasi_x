@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/models/MyColors.dart';
+import 'package:tugas_1_aplikasi_x/models/Post.dart';
+import 'package:tugas_1_aplikasi_x/models/User.dart';
+import 'package:tugas_1_aplikasi_x/widgets/MyAddPost.dart';
 import 'package:tugas_1_aplikasi_x/widgets/MyBottomNavigatorBar.dart';
 import 'package:tugas_1_aplikasi_x/widgets/MyDrawer.dart';
 import 'package:tugas_1_aplikasi_x/widgets/MyFloatingActionButton.dart';
 import 'package:tugas_1_aplikasi_x/widgets/MyPost.dart';
 
 class MobileLayouts extends StatefulWidget {
-  const MobileLayouts({super.key});
+  final User user;
+  const MobileLayouts({super.key, required this.user});
 
   @override
   State<MobileLayouts> createState() => _MobileLayoutsState();
@@ -43,13 +47,13 @@ class _MobileLayoutsState extends State<MobileLayouts>
                 child: Builder(builder: (context) {
                   return InkWell(
                     onTap: () {
+                      print(widget.user.avatar);
                       Scaffold.of(context).openDrawer();
                     },
                     child: CircleAvatar(
                       radius: 1,
                       backgroundColor: Colors.transparent,
-                      backgroundImage: NetworkImage(
-                          'http://localhost:3000/user/profile.png'),
+                      backgroundImage: NetworkImage(widget.user.avatar!),
                     ),
                   );
                 }),
@@ -119,48 +123,70 @@ class _MobileLayoutsState extends State<MobileLayouts>
                 physics: const NeverScrollableScrollPhysics(),
                 controller: tabController,
                 children: [
-                  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        MyPost(
-                          image: "http://localhost:3000/feed/1.png",
-                          profileImage: "http://localhost:3000/user/ok1.jpg",
+                  FutureBuilder<List<Post>>(
+                    future: Post.fetchPosts(),
+                    builder: (context, snapshot) {
+                      print(snapshot);
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      if (snapshot.hasError) {
+                        return Center(child: Text(snapshot.error.toString()));
+                      }
+
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) => Container(
+                          child: MyPost(post: snapshot.data![index]),
                         ),
-                        MyPost(
-                          image: "http://localhost:3000/feed/2.png",
-                          profileImage: "http://localhost:3000/user/ok2.jpg",
-                        ),
-                        MyPost(
-                          image: "http://localhost:3000/feed/3.png",
-                          profileImage: "http://localhost:3000/user/p1.jpg",
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                  SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        MyPost(
-                          image: "http://localhost:3000/feed/1.png",
-                          profileImage: "http://localhost:3000/user/ok1.jpg",
+                  FutureBuilder<List<Post>>(
+                    future: Post.fetchPosts(),
+                    builder: (context, snapshot) {
+                      print(snapshot);
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      if (snapshot.hasError) {
+                        return Center(child: Text(snapshot.error.toString()));
+                      }
+
+                      return ListView.builder(
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) => Container(
+                          child: MyPost(post: snapshot.data![index]),
                         ),
-                        MyPost(
-                          image: "http://localhost:3000/feed/2.png",
-                          profileImage: "http://localhost:3000/user/ok2.jpg",
-                        ),
-                        MyPost(
-                          image: "http://localhost:3000/feed/3.png",
-                          profileImage: "http://localhost:3000/user/p1.jpg",
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ],
               ),
             )
           ],
         ),
-        floatingActionButton: MyFloatigActionButton(),
+        floatingActionButton: MyFloatigActionButton(
+          onPressed: () {
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(12.0),
+                        ),
+                      ),
+                      height: MediaQuery.of(context).size.height,
+                      child: MyAddPost(
+                        user: widget.user,
+                      ));
+                });
+          },
+        ),
         bottomNavigationBar: MyBottomNavigatorBar());
   }
 }

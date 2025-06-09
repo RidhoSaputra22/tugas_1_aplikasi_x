@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tugas_1_aplikasi_x/main.dart';
+import 'package:tugas_1_aplikasi_x/models/User.dart';
 
 class CreateAccountPage extends StatefulWidget {
   const CreateAccountPage({super.key});
@@ -154,7 +155,8 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const MyHomePage()));
+                                builder: (context) => const MyHomePage(
+                                    isLogin: false, user: null)));
                       }
                     : null,
                 style: ElevatedButton.styleFrom(

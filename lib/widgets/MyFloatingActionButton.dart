@@ -2,7 +2,9 @@ import "package:flutter/material.dart";
 import "package:tugas_1_aplikasi_x/models/MyColors.dart";
 
 class MyFloatigActionButton extends StatelessWidget {
-  const MyFloatigActionButton({super.key});
+  final Function()? onPressed;
+
+  MyFloatigActionButton({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +15,7 @@ class MyFloatigActionButton extends StatelessWidget {
         Icons.add,
         color: MyColors.white,
       ),
-      onPressed: () {},
+      onPressed: onPressed as void Function()?,
     );
   }
 }

@@ -15,7 +15,13 @@ class MyLoginPage extends StatefulWidget {
 
 class _MyLoginPageState extends State<MyLoginPage> {
   // final Future<List<User>> users = User.fetchUsers();
-  User user = User(email: "", password: "", nama: "", tanggal_lahir: "");
+  User user = User(
+      id: null,
+      avatar: null,
+      email: null,
+      password: null,
+      nama: null,
+      tanggal_lahir: null);
 
   @override
   void initState() {

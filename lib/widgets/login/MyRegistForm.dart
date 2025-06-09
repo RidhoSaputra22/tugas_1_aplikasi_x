@@ -14,7 +14,6 @@ class MyRegistPage extends StatefulWidget {
     required this.user,
   });
 
-
   @override
   State<MyRegistPage> createState() => _MyRegistPageState();
 }
@@ -28,20 +27,21 @@ class _MyRegistPageState extends State<MyRegistPage> {
   String? selectedDay;
   String? selectedYear;
 
-  final List<String> months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
+  final Map<String, String> months = {
+    'Januari': '01',
+    'Februari': '02',
+    'Maret': '03',
+    'April': '04',
+    'Mei': '05',
+    'Juni': '06',
+    'Juli': '07',
+    'Agustus': '08',
+    'September': '09',
+    'Oktober': '10',
+    'November': '11',
+    'Desember': '12',
+  };
+
   final List<String> days = List.generate(31, (index) => '${index + 1}');
   final List<String> years =
       List.generate(100, (index) => '${DateTime.now().year - index}');
@@ -55,10 +55,7 @@ class _MyRegistPageState extends State<MyRegistPage> {
 
   _regist(user) async {
     final data = await AuthService.register(
-      nama: user.nama,
-      email: user.email,
-      password: user.password,
-      tanggalLahir: user.tanggal_lahir,
+      user,
     );
     if (data) {
       Navigator.push(
@@ -74,9 +71,8 @@ class _MyRegistPageState extends State<MyRegistPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _regist(widget.user);
+    // _regist(widget.user);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -170,7 +166,8 @@ class _MyRegistPageState extends State<MyRegistPage> {
                       child: DropdownButtonFormField<String>(
                         decoration: const InputDecoration(labelText: 'Month'),
                         value: selectedMonth,
-                        items: months
+                        items: months.keys
+                            .toList()
                             .map((month) => DropdownMenuItem(
                                 value: month, child: Text(month)))
                             .toList(),
@@ -275,12 +272,25 @@ class _MyRegistPageState extends State<MyRegistPage> {
                       widget.user.nama = namaController.text.trim();
                       widget.user.email = emailController.text.trim();
                       widget.user.password = passwordController.text.trim();
-                      widget.user.tanggal_lahir =
-                          '$selectedMonth $selectedDay, $selectedYear';
+                      widget.user.tanggal_lahir = DateTime(
+                          int.parse(selectedYear!),
+                          int.parse(months[selectedMonth]!),
+                          int.parse(selectedDay!));
 
                       _regist(widget.user);
                     }
-                  : null,
+                  : () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Please fill all the fields'),
+                          action: SnackBarAction(
+                            label: 'OK',
+                            onPressed: ScaffoldMessenger.of(context)
+                                .hideCurrentSnackBar,
+                          ),
+                        ),
+                      );
+                    },
             ),
           ],
         ),

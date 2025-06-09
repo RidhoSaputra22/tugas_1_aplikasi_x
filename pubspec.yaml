@@ -7,7 +7,11 @@ environment:
   sdk: '>=3.4.0 <4.0.0'
 
 dependencies:
+  dio: ^5.8.0+1
+  file_picker: ^8.3.2
   flutter:
+    sdk: flutter
+  flutter_web_plugins: # If a package specifically needs this structure for web
     sdk: flutter
   font_awesome_flutter: ^10.8.0
   http: ^1.4.0
